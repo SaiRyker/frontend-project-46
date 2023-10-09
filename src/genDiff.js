@@ -1,13 +1,12 @@
 import _ from 'lodash';
 import { readFileSync } from 'node:fs';
-import { cwd } from 'node:process';
 import { resolve } from 'node:path';
 
 const parse = (data) => JSON.parse(data);
 
 const genDiff = (filepath1, filepath2) => {
-  const file1 = parse(readFileSync(resolve(cwd(), `__fixtures__/${filepath1}`)));
-  const file2 = parse(readFileSync(resolve(cwd(), `__fixtures__/${filepath2}`)));
+  const file1 = parse(readFileSync(resolve('__fixtures__', filepath1)));
+  const file2 = parse(readFileSync(resolve('__fixtures__', filepath2)));
 
   const sortedKeys1 = _.sortBy(_.keys(file1));
   const sortedKeys2 = _.sortBy(_.keys(file2));
