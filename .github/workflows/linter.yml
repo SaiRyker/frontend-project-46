@@ -10,5 +10,6 @@ jobs:
         with:
           node-version: '14'
       - run: npm init @eslint/config
+      - run: npm install --save eslint-config-airbnb
       - run: npm install eslint-plugin-import --save-dev
       - run: make lint
