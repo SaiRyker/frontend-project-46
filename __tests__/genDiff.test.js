@@ -1,10 +1,8 @@
-// eslint-disable-next-line import/extensions, import/no-extraneous-dependencies
 import { test, expect } from '@jest/globals';
 import * as path from 'node:path';
 // import * as fs from 'fs';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-// eslint-disable-next-line import/extensions
 import genDiff from '../src/genDiff.js';
 
 // eslint-disable-next-line no-underscore-dangle
