@@ -1,15 +1,18 @@
 import _ from 'lodash';
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { resolve, extname } from 'node:path';
+import parse  from './parsers.js';
 
-const parse = (data) => JSON.parse(data);
+const getExtension = (filepath) => extname(filepath);
+
+const getParsedData = (filepath) => parse(readFileSync(resolve('__fixtures__', filepath)), getExtension(filepath));
 
 const genDiff = (filepath1, filepath2) => {
-  const file1 = parse(readFileSync(resolve('__fixtures__', filepath1)));
-  const file2 = parse(readFileSync(resolve('__fixtures__', filepath2)));
+  const file1Data = getParsedData(filepath1);
+  const file2Data = getParsedData(filepath2);
 
-  const sortedKeys1 = _.sortBy(_.keys(file1));
-  const sortedKeys2 = _.sortBy(_.keys(file2));
+  const sortedKeys1 = _.sortBy(_.keys(file1Data));
+  const sortedKeys2 = _.sortBy(_.keys(file2Data));
   const uniqSortedKeys = _.uniq([...sortedKeys1, ...sortedKeys2]);
 
   // eslint-disable-next-line no-shadow
@@ -18,17 +21,17 @@ const genDiff = (filepath1, filepath2) => {
     // eslint-disable-next-line no-restricted-syntax
     for (const key of uniqSortedKeys) {
       if (sortedKeys1.includes(key) && sortedKeys2.includes(key)) {
-        if (file1[`${key}`] !== file2[`${key}`]) {
+        if (file1Data[`${key}`] !== file2Data[`${key}`]) {
           result.push({
-            status: 0, key, oldValue: file1[`${key}`], newValue: file2[`${key}`],
+            status: 0, key, oldValue: file1Data[`${key}`], newValue: file2Data[`${key}`],
           });
         } else {
-          result.push({ status: 1, key, value: file1[`${key}`] });
+          result.push({ status: 1, key, value: file1Data[`${key}`] });
         }
       } else if (sortedKeys1.includes(key) && !(sortedKeys2.includes(key))) {
-        result.push({ status: -1, key, value: file1[`${key}`] });
+        result.push({ status: -1, key, value: file1Data[`${key}`] });
       } else if (sortedKeys2.includes(key) && !(sortedKeys1.includes(key))) {
-        result.push({ status: 2, key, newValue: file2[`${key}`] });
+        result.push({ status: 2, key, newValue: file2Data[`${key}`] });
       }
     }
     return result;
@@ -63,4 +66,6 @@ const genDiff = (filepath1, filepath2) => {
 
   return buildResult(diffRes);
 };
+
+console.log(genDiff('file1.yaml', 'file2.yaml'))
 export default genDiff;
