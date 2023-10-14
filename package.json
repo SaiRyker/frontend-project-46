@@ -1,9 +1,16 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/SaiRyker/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/SaiRyker/frontend-project-46/actions)",
-  "main": "gendiff.js",
+  "description": "2nd project",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
+  "main": "src/genDiff.js",
   "type": "module",
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
+  },
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
