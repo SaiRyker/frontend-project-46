@@ -4,11 +4,11 @@ install:
 help:
 	node bin/gendiff.js -h
 
-gendiff:
-	node bin/gendiff.js --format 'stylish' 'file1.json' 'file2.json'
-
 lint:
 	npx eslint .
+
+fix:
+	npx eslint . --fix
 
 test:
 	npm test
@@ -18,3 +18,8 @@ test-coverage:
 
 publish:
 	npm publish
+
+link:
+	npm link
+
+setup: install link
