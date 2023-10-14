@@ -14,11 +14,12 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
 const stylish = fs.readFileSync(getFixturePath('stylishTemplate.txt'),'utf8');
-console.log(stylish)
-console.log(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json')))
+const plain = fs.readFileSync(getFixturePath('plainTemplate.txt'), 'utf8');
 
 
 test('for genDiff', () => {
+  expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain')).toEqual(plain);
   expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'))).toEqual(stylish);
+  expect(genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'plain')).toEqual(plain);
   expect(genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'))).toEqual(stylish);
 });
