@@ -22,5 +22,4 @@ const genDiff = (filepath1, filepath2, format = 'stylish') => {
       throw new Error('something went wrong');
   }
 };
-console.log(genDiff('file1.json', 'file2.json'));
 export default genDiff;
