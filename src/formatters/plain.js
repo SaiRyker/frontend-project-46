@@ -19,7 +19,7 @@ const makePlain = (array) => {
                 case 'new':
                     return `Property '${prop}' was added with value: ${outputValue(item.value)}`;
                 case 'deleted':
-                    return `Property '${prop}' was deleted`;
+                    return `Property '${prop}' was removed`;
                 case 'changed':
                     return `Property '${prop}' was updated. From ${outputValue(item.oldValue)} to ${outputValue(item.newValue)}`;
                 case 'nested':
