@@ -1,4 +1,5 @@
 import { Command } from 'commander';
+import * as process from 'node:process';
 import genDiff from '../src/genDiff.js';
 
 const program = new Command();
@@ -11,8 +12,9 @@ program
   .argument('<filepath1>')
   .argument('<filepath2>')
   .action((filepath1, filepath2) => {
+    const { format } = program.opts()
     // eslint-disable-next-line no-console
-    console.log(genDiff(filepath1, filepath2));
+    console.log(genDiff(filepath1, filepath2, format));
   });
 
-program.parse();
+program.parse(process.argv);
