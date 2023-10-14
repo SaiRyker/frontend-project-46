@@ -62,6 +62,9 @@ const makeStylish = (array) => {
         else if (_.get(item, "status") === "new") {
             result += `  + ${item.key}: `
             result += stringify(item.value, 2)
+        } else if (_.get(item, "status") === "no changed") {
+            result += `    ${item.key}: `
+            result += stringify(item.value, 2)
         }
         result+= '\n'
         
