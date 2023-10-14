@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve, extname } from 'node:path';
 import parse  from './parsers.js';
 import searchStatus from './searchStatus.js';
-import makeStylish from './formatters/stylish.js';
+import formateChoice from './formatters/index.js';
 
 
 const getExtension = (filepath) => extname(filepath);
@@ -14,12 +14,8 @@ const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const file2Data = getParsedData(filepath2);
   
   const dataForFormatting = searchStatus(file1Data, file2Data);
-  
-  switch(format) {
-    case 'stylish':
-      return makeStylish(dataForFormatting);
-    default:
-      throw new Error('something went wrong');
-  }
+
+  return formateChoice(dataForFormatting, format);
 };
+
 export default genDiff;
