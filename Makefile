@@ -5,7 +5,7 @@ help:
 	node bin/gendiff.js -h
 
 gendiff:
-	node bin/gendiff.js --format stylish 'file1.json' 'file2.json'
+	node bin/gendiff.js --format 'stylish' 'file1.json' 'file2.json'
 
 lint:
 	npx eslint .
